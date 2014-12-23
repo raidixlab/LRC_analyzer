@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8" />
+    <title>Анализатор пирамидальных кодов 1.4</title>
+    <script type="text/javascript" src="code.js"></script>
+    <style>
+        #table td {
+            border: 1px solid black;
+            width: 10px;
+            height: 10px;
+            text-transform: uppercase;
+        }
+
+        .red {
+            background: red;
+        }
+
+        .green {
+            background: green;
+        }
+
+        .yellow {
+            background: yellow;
+        }
+
+        .cyan {
+            background: cyan;
+        }
+
+        #instructions {
+            font-style: italic;
+            border: 1px dashed black;
+            background: #ccc;
+            padding: 5px;
+        }
+
+        #mgmt {
+            width: 500px;
+            position: relative;
+            line-height: 25px;
+        }
+
+        #mgmt input {
+            position: absolute;
+            right: 0;
+        }
+        
+    </style>
+</html>
+<body>
+    <div id="instructions">Погибший диск нумеруется с 1.<br />Адекватная работа гарантируется только если кол-во дисков больше или равно длине полного страйпа<br />В поле структуры можно вводить цифры 1-9, а также буквы S,E,G. Номера синдромам присваиваются по возрастанию.</div>
+    <div id="mgmt">
+        Количество дисков: <input id="disk_quantity" type="text" /><br />
+        Структура страйпа: <input id="structure" type="text" /><br />
+        Погибший диск: <input id="failed_disk" type="text" /><br />
+        <button onclick="get_parameters();">Получить результат</button>
+    </div>
+</body>
