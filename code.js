@@ -15,6 +15,7 @@ function get_elem(selector) {
 
 function parse_scheme(scheme) {
     var result = {};
+    scheme = scheme.replace(/\s+/g,''); // deleting spaces
     result.length = scheme.length;
     result.struct = [];
     var i = 0;
@@ -74,8 +75,8 @@ function get_parameters() {
     var scheme = parse_scheme(get_elem('#structure').value);
     width = parseInt(get_elem('#disk_quantity').value);
     height = scheme.length;
-    
-    if (get_elem('#structure').value.length > width) {
+   
+    if (scheme.length > width) { 
         error_message(2);
     } 
     else if ((parseInt(get_elem('#failed_disk').value) > width) || (parseInt(get_elem('#failed_disk').value) < 0)) {
@@ -99,7 +100,7 @@ function fill_table(stripe) {
         counter = counter % stripe;
         
         tds[i].innerHTML = scheme.struct[counter];
-        if ((tds[i].innerHTML == 'e') || (tds[i].innerHTML == 'E')) {
+        if ((tds[i].innerHTML[0] == 'e') || (tds[i].innerHTML[0] == 'E')) {
             tds[i].setAttribute('class','cyan');
         }
         
@@ -133,7 +134,7 @@ function mark_readers(stripe) {
                 j = 0;
                 while (j <= stripe - 1) {
                     aj = tds[i - left_lim + j].innerHTML.split('');
-                    if ((aj[0] != 'S') && (aj[0] != 's') && (aj[0] != 'e') && (aj[0] != 'E') && (j != left_lim)) {
+                    if ((aj[0] != 'S') && (aj[0] != 's') && (aj[0] != 'G') && (aj[0] != 'g') && (aj[0] != 'e') && (aj[0] != 'E') && (j != left_lim)) {
                         tds[i - left_lim + j].className = 'green';
                     }
                     j++;
