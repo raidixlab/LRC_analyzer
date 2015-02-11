@@ -14,24 +14,28 @@ function get_elem(selector) {
 }
 
 function parse_scheme(scheme) {
-    var result = {};
+    //var result = {};
     scheme = scheme.replace(/\s+/g,''); // deleting spaces
-    result.length = scheme.length;
-    result.struct = [];
+
+    //result.length = scheme.length;
+    var result = [];
     var i = 0;
-    var s_count = 1;
+    var s_count = 0;
+    
     while (i < scheme.length) {
         if ((scheme[i] == 's') || (scheme[i] == 'S')) {
-            result.struct[i] = 'S<sub>' + s_count + '</sub>';
+            i++;
+            result.push('S<sub>' + scheme[i] + '</sub>');
             s_count++;
         } 
         else {
-            result.struct[i] = scheme[i];
+            result.push(scheme[i]);
         }
         i++;
     }
-    result.struct[i-1] += '|';
-
+    
+    result[i - s_count - 1] += '|';
+    
     return result;
 }
 
@@ -99,7 +103,7 @@ function fill_table(stripe) {
     for (var i = 0; i < tds.length; i++) {
         counter = counter % stripe;
         
-        tds[i].innerHTML = scheme.struct[counter];
+        tds[i].innerHTML = scheme[counter];
         if ((tds[i].innerHTML[0] == 'e') || (tds[i].innerHTML[0] == 'E')) {
             tds[i].setAttribute('class','cyan');
         }
